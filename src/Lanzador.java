@@ -141,7 +141,7 @@ public class Lanzador {
                 if (factores.size() == 1) {
                     return salidaProceso + "\n" + partes[0] + " es primo!\n" + "Operacion completada. Código de salida: " + exitCode ;
                 } else {
-                    return salidaProceso + "\n" + partes[0] + " no es primo" + exitCode;
+                    return salidaProceso + "\n" + partes[0] + " no es primo\n" + "Operacion completada. Código de salida: " + exitCode;
                 }
             } else {
                 return "[ERRO] " + salidaProceso;
