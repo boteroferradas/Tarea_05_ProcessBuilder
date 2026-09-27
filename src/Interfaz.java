@@ -41,6 +41,23 @@ public class Interfaz {
                     }
                     break;
 
+                case "3":
+                    while(true) {
+                        System.out.println("Introduce un número (o 'salir' para terminar):");
+                        String entrada = scanner.nextLine().trim();
+
+                        if(entrada.equalsIgnoreCase("salir")) {
+                            System.out.println("Saliendo del nivel 2...");
+                            break;
+                        }
+
+                        Lanzador.nivel3(entrada);
+                        System.out.println();
+                    }
+                    break;
+
+                case "4":
+
                 default:
                     System.out.println("factor: " + scanner + "Opc");
             }
