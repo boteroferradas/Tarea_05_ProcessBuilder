@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -11,10 +10,10 @@ public class Lanzador {
     /**
      * NIVEL 1: Ejecucion basica e impresion directa.
      * Ejecuta el comando 'factor' de Linux pasándole la entrada del usuario.
-     * Lee la salida estándar/error en tiempo real y la imprime directamente por consola.
+     * Lee la salida estándar/error y la imprime directamente por consola.
      *
-     * @param numero Entrada de texto enviada al comando (ej. "12" o "hola").
-     * "@return" No devuelve nada (void). Imprime el resultaado e infroma del exitCode final.
+     * @param numero String con el número o argumento que se pasará a 'factor' (ej. "12" o "hola").
+     * @return String con la salida del proceso y la confirmación del código de salida
      */
     public static String nivel1(String numero) {
         StringBuilder sb = new StringBuilder();
@@ -23,6 +22,7 @@ public class Lanzador {
             pb.redirectErrorStream(true);
 
             Process process = pb.start();
+
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                 String linea;
                 while ((linea = reader.readLine()) != null) {
@@ -33,20 +33,20 @@ public class Lanzador {
             int exitCode = process.waitFor();
             sb.append("Operacion completada. Código de salida: ").append(exitCode);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             return "Error el ejecutar el comando" + e.getMessage();
         }
         return sb.toString();
     }
 
     /**
-     * NIVEL 2: Control de errores y etiquetado con prefijo.
+     * NIVEL 2: Clasificacion de salida mediante etiquetas OK o ERROR
      * Acumula la salida en un StringBuilder y usa el código de terminación (exitCode)
      * para clasificar el resultado. Añade "[OK]" si se factorizó con éxito (exitCode 0)
      * o "[ERROR]" si el argumento ingresado no es válido (exitCode1).
      *
-     * @param numero Entrada de texto enviada al comando (ej. "12" o "hola").
-     * @return No devuelve nada (void). Imprime el resultaado e infroma del exitCode final.
+     * @param numero String con el número o argumento que se pasará a 'factor' (ej. "12" o "hola").
+     * @return String formateado con la etiqueta correspondiente y la respuesta del comando.
      */
     public static String nivel2(String numero) {
         try {
@@ -73,6 +73,14 @@ public class Lanzador {
         }
     }
 
+    /**
+     * NIVEL 3: Redirección e inserción en archivos de registro (logs).
+     * En lugar de devolver el resultado en pantalla, configura el ProcessBuilder
+     * para escribir los flujos directamente en 'factor_output.log' y 'factor_error.log".
+     *
+     * @param numero String con el número o argumento que se pasará a 'factor' (ej. "12" o "hola").
+     * @return String confirmando que se ejecutó la operacion y mostrando el exitCode
+     */
     public static String nivel3(String numero) {
         try {
 
@@ -94,6 +102,14 @@ public class Lanzador {
         }
     }
 
+    /**
+     * NIVEL 4: Extracción de factores a una lista y evaluación de si el numero pasado es primo o no
+     * Extrae los números devueltos tras los dos puntos (":") a una List<Integer>
+     * y determina si el número es primo comporbando si el tamaño de la lista es 1.
+     *
+     * @param numero String con el número o argumento que se pasará a 'factor' (ej. "12" o "hola").
+     * @return String con la respuesta formateada y la veracidad de si es o no primo.
+     */
     public static String nivel4(String numero) {
         List<Integer> factores = new ArrayList<>();
         try {
@@ -123,9 +139,9 @@ public class Lanzador {
                     }
                 }
                 if (factores.size() == 1) {
-                    return "[OK] " + salidaProceso + partes[0] + " es primo!";
+                    return salidaProceso + "\n" + partes[0] + " es primo!\n" + "Operacion completada. Código de salida: " + exitCode ;
                 } else {
-                    return "[OK] " + salidaProceso + partes[0] + " no es primo";
+                    return salidaProceso + "\n" + partes[0] + " no es primo" + exitCode;
                 }
             } else {
                 return "[ERRO] " + salidaProceso;
