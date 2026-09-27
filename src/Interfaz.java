@@ -21,12 +21,25 @@ public class Interfaz {
                             break;
                         }
 
-                        Lanzador.proceso(entrada);
+                        Lanzador.nivel1(entrada);
                         System.out.println();
                     }
                     break;
 
                 case "2":
+                    while(true) {
+                        System.out.println("Introduce un número (o 'salir' para terminar):");
+                        String entrada = scanner.nextLine().trim();
+
+                        if(entrada.equalsIgnoreCase("salir")) {
+                            System.out.println("Saliendo del nivel 2...");
+                            break;
+                        }
+
+                        Lanzador.nivel2(entrada);
+                        System.out.println();
+                    }
+                    break;
 
                 default:
                     System.out.println("factor: " + scanner + "Opc");
