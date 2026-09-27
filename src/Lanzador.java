@@ -116,7 +116,7 @@ public class Lanzador {
                     System.out.println(partes[0] + " no es primo");
                 }
             } else {
-                System.out.println("[ERROR] " + salidaProceso);
+                System.out.println("[ERRO] " + salidaProceso);
             }
         }catch (Exception e) {
             System.out.println("Error el ejecutar el comando" + e.getMessage());
