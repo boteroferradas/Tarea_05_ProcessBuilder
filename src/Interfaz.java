@@ -12,14 +12,18 @@ public class Interfaz {
             }
             switch (nivel) {
                 case "1":
-                    System.out.println("Introduce un número (o 'salir' para terminar):");
-                    String entrada = scanner.nextLine().trim();
-                    while(!entrada.equalsIgnoreCase("salir") && Integer.parseInt(entrada)) {
-                        Lanzador.proceso(entrada);
-                        System.out.println("Introduce otro número (o 'salir' para terminar):");
-                        entrada = scanner.nextLine().trim();
+                    while(true) {
+                        System.out.println("Introduce un número (o 'salir' para terminar):");
+                        String entrada = scanner.nextLine().trim();
+
+                        if(entrada.equalsIgnoreCase("salir")) {
+                            System.out.println("Saliendo del nivel 1...");
+                            break;
                         }
-                    System.out.println("factor: " + scanner + "Opc");
+
+                        Lanzador.proceso(entrada);
+                        System.out.println();
+                    }
                     break;
 
                 case "2":

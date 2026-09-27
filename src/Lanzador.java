@@ -6,6 +6,9 @@ public class Lanzador {
     public static void proceso(String numero) {
         try {
             ProcessBuilder pb = new ProcessBuilder("factor", numero);
+
+            pb.redirectErrorStream(true);
+
             Process process = pb.start();
 
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
@@ -14,11 +17,12 @@ public class Lanzador {
                     System.out.println(linea);
                 }
             }
+
             int exitCode = process.waitFor();
             System.out.println("Operacion completada. Código de salida: " + exitCode);
 
         }catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error el ejecutar el comando" + e.getMessage());
         }
     }
 }
