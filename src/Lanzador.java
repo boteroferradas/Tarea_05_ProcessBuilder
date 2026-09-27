@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Lanzador {
 
@@ -79,9 +81,9 @@ public class Lanzador {
     }
 
     public static void nivel4(String numero) {
+        List<Integer> factores = new ArrayList<>();
         try {
             ProcessBuilder pb = new ProcessBuilder("factor", numero);
-
             pb.redirectErrorStream(true);
 
             Process process = pb.start();
@@ -95,9 +97,24 @@ public class Lanzador {
             }
 
             int exitCode = process.waitFor();
-
             if (exitCode == 0) {
-                System.out.println("[OK] " + salidaProceso);
+                String resultado = salidaProceso.toString().trim();
+                String [] partes = resultado.split(":");
+                if (partes.length > 1) {
+                    String[] numerosTexto = partes[1].trim().split("\\s+");
+                    for (String n: numerosTexto) {
+                        if (!n.isEmpty()) {
+                            factores.add(Integer.parseInt(n));
+                        }
+                    }
+                }
+                if (factores.size() > 1) {
+                    System.out.println("[OK] " + salidaProceso);
+                    System.out.println(partes[0] + " es primo!");
+                } else {
+                    System.out.println("[OK] " + salidaProceso);
+                    System.out.println(partes[0] + " no es primo");
+                }
             } else {
                 System.out.println("[ERROR] " + salidaProceso);
             }
@@ -105,5 +122,4 @@ public class Lanzador {
             System.out.println("Error el ejecutar el comando" + e.getMessage());
         }
     }
-
 }
