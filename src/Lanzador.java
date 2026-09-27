@@ -86,16 +86,21 @@ public class Lanzador {
 
             Process process = pb.start();
 
+            StringBuilder salidaProceso = new StringBuilder();
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                 String linea;
                 while ((linea = reader.readLine()) != null) {
-                    System.out.println(linea);
+                    salidaProceso.append(linea);
                 }
             }
 
             int exitCode = process.waitFor();
-            System.out.println("Operacion completada. Código de salida: " + exitCode);
 
+            if (exitCode == 0) {
+                System.out.println("[OK] " + salidaProceso);
+            } else {
+                System.out.println("[ERROR] " + salidaProceso);
+            }
         }catch (Exception e) {
             System.out.println("Error el ejecutar el comando" + e.getMessage());
         }
