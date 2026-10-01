@@ -144,7 +144,7 @@ public class Lanzador {
                     return salidaProceso + "\n" + partes[0] + " no es primo\n" + "Operacion completada. Código de salida: " + exitCode;
                 }
             } else {
-                return "[ERRO] " + salidaProceso;
+                return "[ERROR] " + salidaProceso;
             }
         }catch (Exception e) {
             return "Error el ejecutar el comando" + e.getMessage();
