@@ -9,9 +9,9 @@
 | ------------- | ------------- | ------------- |
 | 360 | 2 2 2 3 3 5 | 0 |
 | 1 | Nada | 0 |
-| 1 | 17 | 0 |
-| 1 | factor: 'hola' is not a valid positive integer | 1 |
-| 1 | factor: invalid option -- '5' | 1 |
+| 17| 17 | 0 |
+| hola | factor: 'hola' is not a valid positive integer | 1 |
+| -5 | factor: invalid option -- '5' | 1 |
 
 <h4>Error que tuve programando:</h4>
 
